@@ -179,14 +179,49 @@ public class LinkedList {
         return true;
 
     }
+    public void deleteNthfromEnd(int n){
+        int sz=0;
+        Node temp=head;
+        while (temp!=null) {
+            temp=temp.next;
+            sz++;
+        } 
+        if(n==sz){
+            head=head.next;
+            return;
+        } 
+        int i=1;
+        int iTofind=sz-n;
+        Node prev=head;
+        while (i<iTofind) {
+            prev=prev.next;
+            i++;
+        }
+        prev.next=prev.next.next;
+    } 
+    public boolean isCycle(){
+        Node slow=head;
+        Node fast=head;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+            if(slow==fast){
+                return true;
+            }
+        }
+        return false;
+    } 
+    
     public static void main(String args[]) {
         LinkedList ll = new LinkedList(); 
         ll.addFirst(5);
         ll.addFirst(1);
         ll.addFirst(3);
         ll.addFirst(4);
-        ll.addFirst(5); 
-        System.out.println(ll.checkpalindrome()); 
+        ll.addFirst(5);  
+        System.out.println(ll.isCycle());
+        //System.out.println(ll.checkpalindrome());  
+        //ll.deleteNthfromEnd(3);
         //ll.reverse();
         //ll.print();      
        // System.out.println(ll.removeFirst());
